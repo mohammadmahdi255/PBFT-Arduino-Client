@@ -1,7 +1,10 @@
+
+
 #ifndef __DATALINK_HPP
 #define __DATALINK_HPP
 
-#include "Type.h"
+// #include "Type.h" 
+#include <ArxTypeTraits.h>
 #include "SoftwareSerial.h"
 #include "HardwareSerial.h"
 #include <stdint.h>
@@ -225,7 +228,7 @@ public:
     {
       tx_transfer = handle_tx_frame();
     }
-    else if (serialPort->availableForWrite() >= tx_size || is_same<T, SoftwareSerial>::value)
+    else if (serialPort->availableForWrite() >= tx_size || std::is_same<T, SoftwareSerial>::value)
     {
       serialPort->write(reverse_bits(SFD));
       for (int i = 0; i < tx_size; i++)
